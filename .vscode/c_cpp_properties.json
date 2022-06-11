@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Windows",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ]
+        }
+    ],
+    "version": 4
+}
