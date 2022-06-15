@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <ctime>
 
 extern "C" 
 {
@@ -29,8 +28,7 @@ int save_frame_as_jpeg(AVFrame *pFrame, int FrameNo, int qscale=1) {
 
     jpegContext->flags |= AV_CODEC_FLAG_QSCALE;
     jpegContext->qmin = qscale;
-    clock_t startTime = clock();
-
+    
     if (avcodec_open2(jpegContext, jpegCodec, NULL) < 0) {
         std::cout << "failed to open jpegCodec through avcodec_open2" << std::endl;
         return -1;
@@ -75,16 +73,6 @@ int save_frame_as_jpeg(AVFrame *pFrame, int FrameNo, int qscale=1) {
     }
     // fclose(f);
     avcodec_close(jpegContext);
-
-    clock_t endTime = clock();
-
-    // 측정 시간 계산 (ms단위)
-    clock_t elapsed = endTime - startTime;
-
-    // Second로 변환
-    double timeInSecond = (double)(elapsed / CLOCKS_PER_SEC);
-    std::cout << "Elapsed: " << timeInSecond << "s(" << elapsed << "ms)" << "\n";
-
     std::cout<<"write" <<std::endl;
     return 0;
 }
